@@ -19,7 +19,7 @@ import javafx.stage.StageStyle;
 
 /**
  * Calculator GUI
- * 
+ *
  * @author Joon
  * @version 0.1 Dec 25, 2014
  */
@@ -28,6 +28,11 @@ public class Calculator extends Application {
     final int SIDE = 50;
 
     int state = 0;
+
+    double operand;
+    char operator;
+    double answer;
+
     private Rectangle result;
     private Text display;
 
@@ -160,7 +165,7 @@ public class Calculator extends Application {
                         button4, text4, button5, text5, button6, text6, button7,
                         text7, button8, text8, button9, text9);
 
-        Scene scene = new Scene(root, 200, 350);
+        Scene scene = new Scene(root, 191, 341);
 
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(scene);
@@ -301,6 +306,13 @@ public class Calculator extends Application {
                 subButton.setStrokeWidth(0.3);
                 addButton.setStrokeWidth(3);
                 //add method.
+                //test
+                if (state == 1) {
+                    operand = Double.parseDouble(display.getText());
+                    operator = '+';
+                    state = 2;
+                }
+                //end test
             }
         });
         addText.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -341,7 +353,15 @@ public class Calculator extends Application {
 
                 //equals method.
                 //displays answer
-                state = 0;
+                if (state == 3) {
+                    switch (operator) {
+                        case '+':
+                            answer = operand + Double.parseDouble(display.getText());
+                            display.setText(answer + "");
+                    }
+
+                }
+
             }
         });
         equalText.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -360,7 +380,7 @@ public class Calculator extends Application {
                 addButton.setStrokeWidth(0.3);
                 //equals method.
                 //displays answer
-                state = 0;
+
             }
         });
     }
@@ -386,20 +406,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "0");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -424,20 +431,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "0");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -472,22 +466,22 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "1");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
+                } else if (state == 2) {
+                    acText.setX(19);
+                    acText.setY(SIDE * 2 + 31);
+                    display.setText("1");
+                    state = 3;
+                } else if (state == 3) {
+                    if (!(display.getText().length() >= 9)) {
+
+                        display.setText(display.getText() + "1");
+                        fixDisplay();
+                    }
+
                 }
+
             }
         });
         text1.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -517,20 +511,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "1");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -565,20 +546,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "2");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -610,20 +578,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "2");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -658,20 +613,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "3");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -703,20 +645,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "3");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -751,20 +680,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "4");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -778,7 +694,7 @@ public class Calculator extends Application {
         text4.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                button3.setFill(Color.gray(0.9));
+                button4.setFill(Color.gray(0.9));
                 divButton.setStrokeWidth(0.3);
                 mulButton.setStrokeWidth(0.3);
                 subButton.setStrokeWidth(0.3);
@@ -796,20 +712,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "4");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -844,20 +747,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "5");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -889,20 +779,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "5");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -937,20 +814,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "6");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -982,20 +846,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "6");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -1030,20 +881,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "7");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -1075,20 +913,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "7");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -1123,20 +948,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "8");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -1168,20 +980,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "8");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -1216,20 +1015,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "9");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -1261,20 +1047,7 @@ public class Calculator extends Application {
                     if (!(display.getText().length() >= 9)) {
 
                         display.setText(display.getText() + "9");
-                        display.setX(display.getX() - 27);
-
-                        if (display.getText().length() == 7) {
-                            display.setFont(Font.font("HELVETICA", 42));
-                            display.setX(display.getX() + 27);
-                        }
-                        if (display.getText().length() == 8) {
-                            display.setFont(Font.font("HELVETICA", 36));
-                            display.setX(display.getX() + 25);
-                        }
-                        if (display.getText().length() == 9) {
-                            display.setFont(Font.font("HELVETICA", 32));
-                            display.setX(display.getX() + 24);
-                        }
+                        fixDisplay();
                     }
                 }
             }
@@ -1338,6 +1111,51 @@ public class Calculator extends Application {
             }
         });
     }
+
+    public void fixDisplay() {
+        switch (display.getText().length()) {
+            case 1:
+                display.setFont(Font.font("HELVETICA", 50));
+                display.setX(160);
+                break;
+            case 2:
+                display.setFont(Font.font("HELVETICA", 50));
+                display.setX(133);
+                break;
+            case 3:
+                display.setFont(Font.font("HELVETICA", 50));
+                display.setX(106);
+                break;
+            case 4:
+                display.setFont(Font.font("HELVETICA", 50));
+                display.setX(79);
+                break;
+            case 5:
+                display.setFont(Font.font("HELVETICA", 50));
+                display.setX(52);
+                break;
+            case 6:
+                display.setFont(Font.font("HELVETICA", 50));
+                display.setX(25);
+                break;
+            case 7:
+                display.setFont(Font.font("HELVETICA", 42));
+                display.setX(25);
+                break;
+            case 8:
+                display.setFont(Font.font("HELVETICA", 36));
+                display.setX(23);
+                break;
+            case 9:
+                display.setFont(Font.font("HELVETICA", 32));
+                display.setX(20);
+                break;
+        }
+        if (display.getText().length() > 9) {
+            //scientific notation.
+        }
+    }
+
 
     /**
      * @param args the command line arguments
