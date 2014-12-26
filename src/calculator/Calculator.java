@@ -823,6 +823,16 @@ public class Calculator extends Application {
     }
 
     public void fixDisplay() {
+        //if answer has decimal point at end, remove the decimal point.
+        if (display.getText().indexOf(".") == display.getText().length() - 1) {
+            display.setText(display.getText().substring(0, display.getText().length() - 1));
+        }
+        //if answer has decimal place followed by one 0, remove both the decimal point and the 0.
+        if (display.getText().indexOf(".") == display.getText().length() - 2
+                && display.getText().charAt(display.getText().length() - 1) == '0') {
+            display.setText(display.getText().substring(0, display.getText().length() - 2));
+        }
+
         if (display.getText().indexOf(".") == -1) {
             switch (display.getText().length()) {
                 case 1:
