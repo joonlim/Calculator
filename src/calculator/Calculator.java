@@ -87,51 +87,51 @@ public class Calculator extends Application {
         display.setX(160);
         display.setY(80);
 
-        divButton = new Button("ORANGE", SIDE * 3, SIDE * 2);
+        divButton = new OrangeButton(SIDE * 3, SIDE * 2);
         divText = new ButtonText("/", "WHITE", SIDE * 3 + 19, SIDE * 2 + 31);
-        mulButton = new Button("ORANGE", SIDE * 3, SIDE * 3);
+        mulButton = new OrangeButton(SIDE * 3, SIDE * 3);
         mulText = new ButtonText("X", "WHITE", SIDE * 3 + 19, SIDE * 3 + 31);
-        subButton = new Button("ORANGE", SIDE * 3, SIDE * 4);
+        subButton = new OrangeButton(SIDE * 3, SIDE * 4);
         subText = new ButtonText("-", "WHITE", SIDE * 3 + 19, SIDE * 4 + 31);
-        addButton = new Button("ORANGE", SIDE * 3, SIDE * 5);
+        addButton = new OrangeButton(SIDE * 3, SIDE * 5);
         addText = new ButtonText("+", "WHITE", SIDE * 3 + 19, SIDE * 5 + 31);
-        equalButton = new Button("ORANGE", SIDE * 3, SIDE * 6);
+        equalButton = new OrangeButton(SIDE * 3, SIDE * 6);
         equalText = new ButtonText("=", "WHITE", SIDE * 3 + 19, SIDE * 6 + 31);
 
         //AC button changes to "C" when calculator is in use.
         //Text width becomes 19 and height becomes SIDE*2+31
-        acButton = new Button("GREY", 0, SIDE * 2);
+        acButton = new GreyButton(0, SIDE * 2);
         acText = new ButtonText("AC", "BLACK", 12, SIDE * 2 + 31);
 
-        negButton = new Button("GREY", SIDE, SIDE * 2);
+        negButton = new GreyButton(SIDE, SIDE * 2);
         negText = new ButtonText("+/-", "BLACK", SIDE + 10, SIDE * 2 + 31);
-        perButton = new Button("GREY", SIDE * 2, SIDE * 2);
+        perButton = new GreyButton(SIDE * 2, SIDE * 2);
         perText = new ButtonText("%", "BLACK", SIDE * 2 + 19, SIDE * 2 + 31);
 
-        decButton = new Button("WHITE", SIDE * 2, SIDE * 6);
+        decButton = new WhiteButton(SIDE * 2, SIDE * 6);
         decText = new ButtonText(".", "BLACK", SIDE * 2 + 19, SIDE * 6 + 31);
 
-        button0 = new Button("WHITE", 0, SIDE * 6);
+        button0 = new WhiteButton(0, SIDE * 6);
         button0.setWidth(100.0);
         text0 = new ButtonText("0", "BLACK", 19, SIDE * 6 + 31);
 
-        button1 = new Button("WHITE", 0, SIDE * 5);
+        button1 = new WhiteButton(0, SIDE * 5);
         text1 = new ButtonText("1", "BLACK", 19, SIDE * 5 + 31);
-        button2 = new Button("WHITE", SIDE, SIDE * 5);
+        button2 = new WhiteButton(SIDE, SIDE * 5);
         text2 = new ButtonText("2", "BLACK", SIDE + 19, SIDE * 5 + 31);
-        button3 = new Button("WHITE", SIDE * 2, SIDE * 5);
+        button3 = new WhiteButton(SIDE * 2, SIDE * 5);
         text3 = new ButtonText("3", "BLACK", SIDE * 2 + 19, SIDE * 5 + 31);
-        button4 = new Button("WHITE", 0, SIDE * 4);
+        button4 = new WhiteButton(0, SIDE * 4);
         text4 = new ButtonText("4", "BLACK", 19, SIDE * 4 + 31);
-        button5 = new Button("WHITE", SIDE, SIDE * 4);
+        button5 = new WhiteButton(SIDE, SIDE * 4);
         text5 = new ButtonText("5", "BLACK", SIDE + 19, SIDE * 4 + 31);
-        button6 = new Button("WHITE", SIDE * 2, SIDE * 4);
+        button6 = new WhiteButton(SIDE * 2, SIDE * 4);
         text6 = new ButtonText("6", "BLACK", SIDE * 2 + 19, SIDE * 4 + 31);
-        button7 = new Button("WHITE", 0, SIDE * 3);
+        button7 = new WhiteButton(0, SIDE * 3);
         text7 = new ButtonText("7", "BLACK", 19, SIDE * 3 + 31);
-        button8 = new Button("WHITE", SIDE, SIDE * 3);
+        button8 = new WhiteButton(SIDE, SIDE * 3);
         text8 = new ButtonText("8", "BLACK", SIDE + 19, SIDE * 3 + 31);
-        button9 = new Button("WHITE", SIDE * 2, SIDE * 3);
+        button9 = new WhiteButton(SIDE * 2, SIDE * 3);
         text9 = new ButtonText("9", "BLACK", SIDE * 2 + 19, SIDE * 3 + 31);
 
         setDivButton();
@@ -1155,7 +1155,6 @@ public class Calculator extends Application {
             //scientific notation.
         }
     }
-
 
     /**
      * @param args the command line arguments
