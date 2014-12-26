@@ -186,10 +186,8 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 divButton.setFill(Color.ORANGE);
+                setStrokes();
                 divButton.setStrokeWidth(3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
 
                 //divide method.
             }
@@ -204,10 +202,8 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 divButton.setFill(Color.ORANGE);
+                setStrokes();
                 divButton.setStrokeWidth(3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
                 //divide method.
             }
         });
@@ -225,10 +221,9 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 mulButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
+                setStrokes();
                 mulButton.setStrokeWidth(3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+
                 //multiply method.
             }
         });
@@ -242,10 +237,9 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 mulButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
+                setStrokes();
                 mulButton.setStrokeWidth(3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+
                 //multiply method.
             }
         });
@@ -263,10 +257,9 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 subButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
+                setStrokes();
                 subButton.setStrokeWidth(3);
-                addButton.setStrokeWidth(0.3);
+
                 //subtract method.
             }
         });
@@ -280,10 +273,9 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 subButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
+                setStrokes();
                 subButton.setStrokeWidth(3);
-                addButton.setStrokeWidth(0.3);
+
                 //subtract method.
             }
         });
@@ -301,18 +293,9 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 addButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
+                setStrokes();
                 addButton.setStrokeWidth(3);
                 //add method.
-                //test
-                if (state == 1) {
-                    operand = Double.parseDouble(display.getText());
-                    operator = '+';
-                    state = 2;
-                }
-                //end test
             }
         });
         addText.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -325,9 +308,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 addButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
+                setStrokes();
                 addButton.setStrokeWidth(3);
                 //add method.
             }
@@ -346,10 +327,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 equalButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 //equals method.
                 //displays answer
@@ -374,10 +352,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 equalButton.setFill(Color.ORANGE);
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
                 //equals method.
                 //displays answer
 
@@ -396,10 +371,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button0.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 1) {
 
@@ -421,10 +393,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button0.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 1) {
 
@@ -449,10 +418,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button1.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -468,18 +434,6 @@ public class Calculator extends Application {
                         display.setText(display.getText() + "1");
                         fixDisplay();
                     }
-                } else if (state == 2) {
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("1");
-                    state = 3;
-                } else if (state == 3) {
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "1");
-                        fixDisplay();
-                    }
-
                 }
 
             }
@@ -494,10 +448,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button1.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -529,10 +480,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button2.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -561,10 +509,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button2.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -596,10 +541,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button3.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -628,10 +570,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button3.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -663,10 +602,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button4.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -695,10 +631,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button4.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -730,10 +663,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button5.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -762,10 +692,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button5.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -797,10 +724,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button6.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -829,10 +753,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button6.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -864,10 +785,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button7.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -896,10 +814,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button7.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -931,10 +846,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button8.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -963,10 +875,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button8.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -998,10 +907,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button9.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -1030,10 +936,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 button9.setFill(Color.gray(0.9));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (state == 0) {
                     // set ac to C
@@ -1065,10 +968,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 acButton.setFill(Color.gray(0.8));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (acText.getText().equals("C")) {
                     acText.setText("AC");
@@ -1093,10 +993,7 @@ public class Calculator extends Application {
             @Override
             public void handle(MouseEvent event) {
                 acButton.setFill(Color.gray(0.8));
-                divButton.setStrokeWidth(0.3);
-                mulButton.setStrokeWidth(0.3);
-                subButton.setStrokeWidth(0.3);
-                addButton.setStrokeWidth(0.3);
+                setStrokes();
 
                 if (acText.getText().equals("C")) {
                     acText.setText("AC");
@@ -1154,6 +1051,13 @@ public class Calculator extends Application {
         if (display.getText().length() > 9) {
             //scientific notation.
         }
+    }
+
+    public void setStrokes() {
+        divButton.setStrokeWidth(0.3);
+        mulButton.setStrokeWidth(0.3);
+        subButton.setStrokeWidth(0.3);
+        addButton.setStrokeWidth(0.3);
     }
 
     /**

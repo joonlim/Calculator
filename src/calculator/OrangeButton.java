@@ -5,6 +5,8 @@
  */
 package calculator;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -18,6 +20,7 @@ public class OrangeButton extends Button {
     public OrangeButton(double xCoord, double yCoord) {
         super(xCoord, yCoord);
         this.setFill(Color.ORANGE);
+
     }
 
 }
