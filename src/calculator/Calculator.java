@@ -190,6 +190,16 @@ public class Calculator extends Application {
                 divButton.setStrokeWidth(3);
 
                 //divide method.
+                if (state == 1) {
+                    operator = '/';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '/';
+                    state = 2;
+                }
             }
         });
         divText.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -205,6 +215,16 @@ public class Calculator extends Application {
                 setStrokes();
                 divButton.setStrokeWidth(3);
                 //divide method.
+                if (state == 1) {
+                    operator = '/';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '/';
+                    state = 2;
+                }
             }
         });
     }
@@ -225,6 +245,16 @@ public class Calculator extends Application {
                 mulButton.setStrokeWidth(3);
 
                 //multiply method.
+                if (state == 1) {
+                    operator = '*';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '*';
+                    state = 2;
+                }
             }
         });
         mulText.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -241,6 +271,16 @@ public class Calculator extends Application {
                 mulButton.setStrokeWidth(3);
 
                 //multiply method.
+                if (state == 1) {
+                    operator = '*';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '*';
+                    state = 2;
+                }
             }
         });
     }
@@ -261,6 +301,16 @@ public class Calculator extends Application {
                 subButton.setStrokeWidth(3);
 
                 //subtract method.
+                if (state == 1) {
+                    operator = '-';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '-';
+                    state = 2;
+                }
             }
         });
         subText.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -277,6 +327,16 @@ public class Calculator extends Application {
                 subButton.setStrokeWidth(3);
 
                 //subtract method.
+                if (state == 1) {
+                    operator = '-';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '-';
+                    state = 2;
+                }
             }
         });
     }
@@ -296,6 +356,16 @@ public class Calculator extends Application {
                 setStrokes();
                 addButton.setStrokeWidth(3);
                 //add method.
+                if (state == 1) {
+                    operator = '+';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '+';
+                    state = 2;
+                }
             }
         });
         addText.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -311,6 +381,16 @@ public class Calculator extends Application {
                 setStrokes();
                 addButton.setStrokeWidth(3);
                 //add method.
+                if (state == 1) {
+                    operator = '+';
+                    operand = Double.parseDouble(display.getText());
+                    state = 2;
+                }
+                if (state == 3) {
+                    deriveAnswer();
+                    operator = '+';
+                    state = 2;
+                }
             }
         });
     }
@@ -332,12 +412,8 @@ public class Calculator extends Application {
                 //equals method.
                 //displays answer
                 if (state == 3) {
-                    switch (operator) {
-                        case '+':
-                            answer = operand + Double.parseDouble(display.getText());
-                            display.setText(answer + "");
-                    }
-
+                    deriveAnswer();
+                    state = 1;
                 }
 
             }
@@ -355,7 +431,10 @@ public class Calculator extends Application {
                 setStrokes();
                 //equals method.
                 //displays answer
-
+                if (state == 3) {
+                    deriveAnswer();
+                    state = 2;
+                }
             }
         });
     }
@@ -373,14 +452,7 @@ public class Calculator extends Application {
                 button0.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "0");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("0");
             }
         });
         text0.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -395,14 +467,7 @@ public class Calculator extends Application {
                 button0.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "0");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("0");
             }
         });
     }
@@ -420,21 +485,7 @@ public class Calculator extends Application {
                 button1.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("1");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "1");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("1");
 
             }
         });
@@ -450,21 +501,7 @@ public class Calculator extends Application {
                 button1.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("1");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "1");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("1");
             }
         });
     }
@@ -482,21 +519,7 @@ public class Calculator extends Application {
                 button2.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("2");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "2");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("2");
             }
         });
         text2.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -511,21 +534,7 @@ public class Calculator extends Application {
                 button2.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("2");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "2");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("2");
             }
         });
     }
@@ -543,21 +552,7 @@ public class Calculator extends Application {
                 button3.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("3");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "3");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("3");
             }
         });
         text3.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -572,21 +567,7 @@ public class Calculator extends Application {
                 button3.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("3");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "3");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("3");
             }
         });
     }
@@ -604,21 +585,7 @@ public class Calculator extends Application {
                 button4.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("4");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "4");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("4");
             }
         });
         text4.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -633,21 +600,7 @@ public class Calculator extends Application {
                 button4.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("4");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "4");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("4");
             }
         });
     }
@@ -665,21 +618,7 @@ public class Calculator extends Application {
                 button5.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("5");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "5");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("5");
             }
         });
         text5.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -694,21 +633,7 @@ public class Calculator extends Application {
                 button5.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("5");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "5");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("5");
             }
         });
     }
@@ -726,21 +651,7 @@ public class Calculator extends Application {
                 button6.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("6");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "6");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("6");
             }
         });
         text6.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -755,21 +666,7 @@ public class Calculator extends Application {
                 button6.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("6");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "6");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("6");
             }
         });
     }
@@ -787,21 +684,8 @@ public class Calculator extends Application {
                 button7.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("7");
-                    state = 1;
-                } else if (state == 1) {
+                numberFunction("7");
 
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "7");
-                        fixDisplay();
-                    }
-                }
             }
         });
         text7.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -816,21 +700,7 @@ public class Calculator extends Application {
                 button7.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("7");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "7");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("7");
             }
         });
     }
@@ -848,21 +718,7 @@ public class Calculator extends Application {
                 button8.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("8");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "8");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("8");
             }
         });
         text8.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -877,21 +733,7 @@ public class Calculator extends Application {
                 button8.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("8");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "8");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("8");
             }
         });
     }
@@ -909,21 +751,7 @@ public class Calculator extends Application {
                 button9.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("9");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "9");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("9");
             }
         });
         text9.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -938,21 +766,7 @@ public class Calculator extends Application {
                 button9.setFill(Color.gray(0.9));
                 setStrokes();
 
-                if (state == 0) {
-                    // set ac to C
-                    acText.setText("C");
-                    acText.setX(19);
-                    acText.setY(SIDE * 2 + 31);
-                    display.setText("9");
-                    state = 1;
-                } else if (state == 1) {
-
-                    if (!(display.getText().length() >= 9)) {
-
-                        display.setText(display.getText() + "9");
-                        fixDisplay();
-                    }
-                }
+                numberFunction("9");
             }
         });
     }
@@ -1002,51 +816,92 @@ public class Calculator extends Application {
                 }
 
                 display.setText("0");
-                display.setFont(Font.font("HELVETICA", 50));
-                display.setX(160);
+                fixDisplay();
                 state = 0;
             }
         });
     }
 
     public void fixDisplay() {
-        switch (display.getText().length()) {
-            case 1:
-                display.setFont(Font.font("HELVETICA", 50));
-                display.setX(160);
-                break;
-            case 2:
-                display.setFont(Font.font("HELVETICA", 50));
-                display.setX(133);
-                break;
-            case 3:
-                display.setFont(Font.font("HELVETICA", 50));
-                display.setX(106);
-                break;
-            case 4:
-                display.setFont(Font.font("HELVETICA", 50));
-                display.setX(79);
-                break;
-            case 5:
-                display.setFont(Font.font("HELVETICA", 50));
-                display.setX(52);
-                break;
-            case 6:
-                display.setFont(Font.font("HELVETICA", 50));
-                display.setX(25);
-                break;
-            case 7:
-                display.setFont(Font.font("HELVETICA", 42));
-                display.setX(25);
-                break;
-            case 8:
-                display.setFont(Font.font("HELVETICA", 36));
-                display.setX(23);
-                break;
-            case 9:
-                display.setFont(Font.font("HELVETICA", 32));
-                display.setX(20);
-                break;
+        if (display.getText().indexOf(".") == -1) {
+            switch (display.getText().length()) {
+                case 1:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(160);
+                    break;
+                case 2:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(133);
+                    break;
+                case 3:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(106);
+                    break;
+                case 4:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(79);
+                    break;
+                case 5:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(52);
+                    break;
+                case 6:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(25);
+                    break;
+                case 7:
+                    display.setFont(Font.font("HELVETICA", 42));
+                    display.setX(25);
+                    break;
+                case 8:
+                    display.setFont(Font.font("HELVETICA", 36));
+                    display.setX(23);
+                    break;
+                case 9:
+                    display.setFont(Font.font("HELVETICA", 32));
+                    display.setX(20);
+                    break;
+            }
+        } else { // contains a decimal. 
+            switch (display.getText().length()) {
+                case 1:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(170);
+                    break;
+                case 2:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(143);
+                    break;
+                case 3:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(122);
+                    break;
+                case 4:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(95);
+                    break;
+                case 5:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(68);
+                    break;
+                case 6:
+                    display.setFont(Font.font("HELVETICA", 50));
+                    display.setX(41);
+                    break;
+                case 7:
+                    display.setFont(Font.font("HELVETICA", 42));
+                    display.setX(41);
+                    break;
+                case 8:
+                    display.setFont(Font.font("HELVETICA", 36));
+                    display.setX(39);
+                    break;
+                case 9:
+                    display.setFont(Font.font("HELVETICA", 32));
+                    display.setX(36);
+                    break;
+            }
+
         }
         if (display.getText().length() > 9) {
             //scientific notation.
@@ -1058,6 +913,54 @@ public class Calculator extends Application {
         mulButton.setStrokeWidth(0.3);
         subButton.setStrokeWidth(0.3);
         addButton.setStrokeWidth(0.3);
+    }
+
+    private void setACToC() {
+        // set ac to C
+        acText.setText("C");
+        acText.setX(19);
+        acText.setY(SIDE * 2 + 31);
+    }
+
+    private void numberFunction(String number) {
+        if (state == 0 && number != "0") {
+            setACToC();
+            display.setText(number);
+            state = 1;
+        } else if (state == 1) {
+            if (!(display.getText().length() >= 9)) {
+                display.setText(display.getText() + number);
+                fixDisplay();
+            }
+        } else if (state == 2) {
+            display.setText(number);
+            fixDisplay();
+            state = 3;
+        } else if (state == 3) {
+            if (!(display.getText().length() >= 9)) {
+                display.setText(display.getText() + number);
+                fixDisplay();
+            }
+        }
+    }
+
+    private void deriveAnswer() throws NumberFormatException {
+        switch (operator) {
+            case '+':
+                operand += Double.parseDouble(display.getText());
+                break;
+            case '-':
+                operand -= Double.parseDouble(display.getText());
+                break;
+            case '*':
+                operand *= Double.parseDouble(display.getText());
+                break;
+            case '/':
+                operand /= Double.parseDouble(display.getText());
+                break;
+        }
+        display.setText(operand + "");
+        fixDisplay();
     }
 
     /**
