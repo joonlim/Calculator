@@ -15,7 +15,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * Calculator GUI
@@ -142,7 +141,7 @@ public class Calculator extends Application {
         setACButton();
 //        setNegButton();
 //        setPerButton();
-        
+
         setWhiteButton(decButton, decText, ".");
         setWhiteButton(button1, text1, "1");
         setWhiteButton(button2, text2, "2");
@@ -154,8 +153,6 @@ public class Calculator extends Application {
         setWhiteButton(button8, text8, "8");
         setWhiteButton(button9, text9, "9");
         setWhiteButton(button0, text0, "0");
-
-       
 
         Pane root = new Pane();
 
@@ -190,7 +187,7 @@ public class Calculator extends Application {
                 operatorButton.setFill(Color.ORANGE);
                 setStrokes();
 
-                if (value != "=") {
+                if (!value.equals("=")) {
                     operatorButton.setStrokeWidth(3);
                 }
 
@@ -225,7 +222,7 @@ public class Calculator extends Application {
                 operatorButton.setFill(Color.ORANGE);
                 setStrokes();
 
-                if (value != "=") {
+                if (!value.equals("=")) {
                     operatorButton.setStrokeWidth(3);
                 }
 
@@ -249,41 +246,6 @@ public class Calculator extends Application {
             }
         });
     }
-//
-//    private void setDivButton() {
-//        //Divide Button
-//        divButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                divButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        divButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                divButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                divButton.setStrokeWidth(3);
-//
-//                divideMethod();
-//            }
-//        });
-//        divText.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                divButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        divText.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                divButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                divButton.setStrokeWidth(3);
-//                divideMethod();
-//            }
-//        });
-//    }
 
     private void divideMethod() throws NumberFormatException {
         //divide method.
@@ -299,41 +261,6 @@ public class Calculator extends Application {
         }
     }
 
-//    private void setMulButton() {
-//        //Multiply Button
-//        mulButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                mulButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        mulButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                mulButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                mulButton.setStrokeWidth(3);
-//
-//                multiplyMethod();
-//            }
-//        });
-//        mulText.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                mulButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        mulText.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                mulButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                mulButton.setStrokeWidth(3);
-//
-//                multiplyMethod();
-//            }
-//        });
-//    }
     private void multiplyMethod() throws NumberFormatException {
         //multiply method.
         if (state == 1) {
@@ -348,41 +275,6 @@ public class Calculator extends Application {
         }
     }
 
-//    private void setSubButton() {
-//        //Subtract Button
-//        subButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                subButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        subButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                subButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                subButton.setStrokeWidth(3);
-//
-//                subtractMethod();
-//            }
-//        });
-//        subText.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                subButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        subText.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                subButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                subButton.setStrokeWidth(3);
-//
-//                subtractMethod();
-//            }
-//        });
-//    }
     private void subtractMethod() throws NumberFormatException {
         //subtract method.
         if (state == 1) {
@@ -397,39 +289,6 @@ public class Calculator extends Application {
         }
     }
 
-//    private void setAddButton() {
-//        //Add Button
-//        addButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                addButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        addButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                addButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                addButton.setStrokeWidth(3);
-//                addMethod();
-//            }
-//        });
-//        addText.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                addButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        addText.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                addButton.setFill(Color.ORANGE);
-//                setStrokes();
-//                addButton.setStrokeWidth(3);
-//                addMethod();
-//            }
-//        });
-//    }
     private void addMethod() throws NumberFormatException {
         //add method.
         if (state == 1) {
@@ -444,40 +303,6 @@ public class Calculator extends Application {
         }
     }
 
-//    private void setEqualButton() {
-//        //Equal Button
-//        equalButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                equalButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        equalButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                equalButton.setFill(Color.ORANGE);
-//                setStrokes();
-//
-//                equalsMethod();
-//
-//            }
-//        });
-//        equalText.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                equalButton.setFill(Color.DARKORANGE);
-//            }
-//        });
-//        equalText.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                equalButton.setFill(Color.ORANGE);
-//                setStrokes();
-//
-//                equalsMethod();
-//            }
-//        });
-//    }
     private void equalsMethod() throws NumberFormatException {
         //equals method.
         //displays answer
@@ -530,41 +355,6 @@ public class Calculator extends Application {
         });
     }
 
-//    private void setDecButton() {
-//        decButton.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                decButton.setFill(Color.gray(0.85));
-//            }
-//        });
-//        decButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                decButton.setFill(Color.gray(0.9));
-//                setStrokes();
-//                decimalPointMethod();
-//
-//            }
-//        });
-//        decText.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event
-//            ) {
-//                decButton.setFill(Color.gray(0.85));
-//            }
-//        });
-//        decText.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event
-//            ) {
-//                decButton.setFill(Color.gray(0.9));
-//                setStrokes();
-//                decimalPointMethod();
-//
-//            }
-//        });
-//    }
-
     private void decimalPointMethod() {
         if (state == 0) {
             display.setText("0.");
@@ -586,338 +376,6 @@ public class Calculator extends Application {
             }
         }
     }
-
-//    private void setButton0() {
-//        button0.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button0.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button0.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button0.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("0");
-//            }
-//        });
-//        text0.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button0.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text0.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button0.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("0");
-//            }
-//        });
-//    }
-
-//    private void setButton1() {
-//        button1.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button1.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button1.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button1.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("1");
-//
-//            }
-//        });
-//        text1.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button1.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text1.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button1.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("1");
-//            }
-//        });
-//    }
-
-//    private void setButton2() {
-//        button2.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button2.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button2.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button2.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("2");
-//            }
-//        });
-//        text2.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button2.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text2.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button2.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("2");
-//            }
-//        });
-//    }
-
-//    private void setButton3() {
-//        button3.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button3.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button3.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button3.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("3");
-//            }
-//        });
-//        text3.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button3.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text3.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button3.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("3");
-//            }
-//        });
-//    }
-
-//    private void setButton4() {
-//        button4.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button4.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button4.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button4.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("4");
-//            }
-//        });
-//        text4.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button4.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text4.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button4.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("4");
-//            }
-//        });
-//    }
-
-//    private void setButton5() {
-//        button5.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button5.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button5.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button5.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("5");
-//            }
-//        });
-//        text5.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button5.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text5.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button5.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("5");
-//            }
-//        });
-//    }
-
-//    private void setButton6() {
-//        button6.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button6.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button6.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button6.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("6");
-//            }
-//        });
-//        text6.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button6.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text6.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button6.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("6");
-//            }
-//        });
-//    }
-
-//    private void setButton7() {
-//        button7.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button7.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button7.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button7.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("7");
-//
-//            }
-//        });
-//        text7.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button7.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text7.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button7.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("7");
-//            }
-//        });
-//    }
-
-//    private void setButton8() {
-//        button8.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button8.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button8.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button8.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("8");
-//            }
-//        });
-//        text8.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button8.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text8.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button8.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("8");
-//            }
-//        });
-//    }
-
-//    private void setButton9() {
-//        button9.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button9.setFill(Color.gray(0.85));
-//            }
-//        });
-//        button9.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button9.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("9");
-//            }
-//        });
-//        text9.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button9.setFill(Color.gray(0.85));
-//            }
-//        });
-//        text9.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                button9.setFill(Color.gray(0.9));
-//                setStrokes();
-//
-//                numberFunction("9");
-//            }
-//        });
-//    }
 
     private void setACButton() {
         acButton.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -971,7 +429,6 @@ public class Calculator extends Application {
 // fix this method.
 
     /**
-     * - if number can be represented as an integer, make it an integer
      *
      * - display text changes if there is a decimal point or a negative symbol
      *
