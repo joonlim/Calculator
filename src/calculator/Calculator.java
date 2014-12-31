@@ -41,9 +41,10 @@ public class Calculator extends Application {
     private OrangeButton addButton;
     private OrangeButton equalButton;
 
-    private Rectangle acButton;
-    private Rectangle negButton;
-    private Rectangle perButton;
+    private GreyButton acButton;
+    private GreyButton negButton;
+    private GreyButton perButton;
+    
     private WhiteButton decButton;
     private WhiteButton button0;
     private WhiteButton button1;
@@ -138,9 +139,11 @@ public class Calculator extends Application {
         setOrangeButton(addButton, addText, "+");
         setOrangeButton(subButton, subText, "-");
         setOrangeButton(equalButton, equalText, "=");
-        setACButton();
-//        setNegButton();
-//        setPerButton();
+
+        setGreyButton(acButton, acText, "AC");
+        setGreyButton(negButton, negText, "+/-");
+        setGreyButton(perButton, perText, "%");
+        
 
         setWhiteButton(decButton, decText, ".");
         setWhiteButton(button1, text1, "1");
@@ -377,57 +380,70 @@ public class Calculator extends Application {
         }
     }
 
-    private void setACButton() {
-        acButton.setOnMousePressed(new EventHandler<MouseEvent>() {
+    private void setGreyButton(GreyButton greyButton, Text greyText, String value) {
+        greyButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                acButton.setFill(Color.gray(0.75));
+                greyButton.setFill(Color.gray(0.75));
             }
         });
-        acButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
+        greyButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                acButton.setFill(Color.gray(0.8));
+                greyButton.setFill(Color.gray(0.8));
                 setStrokes();
 
-                if (acText.getText().equals("C")) {
-                    acText.setText("AC");
-                    acText.setX(12);
-                    acText.setY(SIDE * 2 + 31);
+                switch (value) {
+                    case "AC":
+                        acMethod();
+                        break;
+                    case "+/-":
+                        negPosMethod();
+                        break;
+                    case "%":
+                        percentMethod();
+                        break;
                 }
-
-                display.setText("0");
-                fixDisplay(false);
-                state = 0;
-
             }
         });
-        acText.setOnMousePressed(new EventHandler<MouseEvent>() {
+        greyText.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                acButton.setFill(Color.gray(0.75));
+                greyButton.setFill(Color.gray(0.75));
             }
         });
-        acText.setOnMouseReleased(new EventHandler<MouseEvent>() {
+        greyText.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                acButton.setFill(Color.gray(0.8));
+                greyButton.setFill(Color.gray(0.8));
                 setStrokes();
 
-                if (acText.getText().equals("C")) {
-                    acText.setText("AC");
-                    acText.setX(12);
-                    acText.setY(SIDE * 2 + 31);
+                switch (value) {
+                    case "AC":
+                        acMethod();
                 }
-
-                display.setText("0");
-                fixDisplay(false);
-                state = 0;
             }
         });
     }
-// fix this method.
 
+    private void acMethod() {
+        if (acText.getText().equals("C")) {
+            setACtoC();
+        }
+
+        display.setText("0");
+        fixDisplay(false);
+        state = 0;
+    }
+    
+    private void negPosMethod() {
+        
+    }
+
+    private void percentMethod() {
+        
+    }
+    
     /**
      *
      * - display text changes if there is a decimal point or a negative symbol
@@ -595,10 +611,18 @@ public class Calculator extends Application {
     }
 
     private void setACToC() {
-        // set ac to C
+        // set AC to C
         acText.setText("C");
         acText.setX(19);
         acText.setY(SIDE * 2 + 31);
+    }
+
+    private void setACtoC() {
+        // set C to AC
+        acText.setText("AC");
+        acText.setX(12);
+        acText.setY(SIDE * 2 + 31);
+
     }
 
     private void numberFunction(String number) {
