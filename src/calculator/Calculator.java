@@ -44,7 +44,7 @@ public class Calculator extends Application {
     private GreyButton acButton;
     private GreyButton negButton;
     private GreyButton perButton;
-    
+
     private WhiteButton decButton;
     private WhiteButton button0;
     private WhiteButton button1;
@@ -92,7 +92,7 @@ public class Calculator extends Application {
         mulButton = new OrangeButton(SIDE * 3, SIDE * 3);
         mulText = new ButtonText("X", "WHITE", SIDE * 3 + 19, SIDE * 3 + 31);
         subButton = new OrangeButton(SIDE * 3, SIDE * 4);
-        subText = new ButtonText("-", "WHITE", SIDE * 3 + 19, SIDE * 4 + 31);
+        subText = new ButtonText("-", "WHITE", SIDE * 3 + 21, SIDE * 4 + 31);
         addButton = new OrangeButton(SIDE * 3, SIDE * 5);
         addText = new ButtonText("+", "WHITE", SIDE * 3 + 19, SIDE * 5 + 31);
         equalButton = new OrangeButton(SIDE * 3, SIDE * 6);
@@ -106,10 +106,10 @@ public class Calculator extends Application {
         negButton = new GreyButton(SIDE, SIDE * 2);
         negText = new ButtonText("+/-", "BLACK", SIDE + 10, SIDE * 2 + 31);
         perButton = new GreyButton(SIDE * 2, SIDE * 2);
-        perText = new ButtonText("%", "BLACK", SIDE * 2 + 19, SIDE * 2 + 31);
+        perText = new ButtonText("%", "BLACK", SIDE * 2 + 17, SIDE * 2 + 31);
 
         decButton = new WhiteButton(SIDE * 2, SIDE * 6);
-        decText = new ButtonText(".", "BLACK", SIDE * 2 + 19, SIDE * 6 + 31);
+        decText = new ButtonText(".", "BLACK", SIDE * 2 + 22, SIDE * 6 + 28);
 
         button0 = new WhiteButton(0, SIDE * 6);
         button0.setWidth(100.0);
@@ -143,7 +143,6 @@ public class Calculator extends Application {
         setGreyButton(acButton, acText, "AC");
         setGreyButton(negButton, negText, "+/-");
         setGreyButton(perButton, perText, "%");
-        
 
         setWhiteButton(decButton, decText, ".");
         setWhiteButton(button1, text1, "1");
@@ -181,13 +180,13 @@ public class Calculator extends Application {
         operatorButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                operatorButton.setFill(Color.DARKORANGE);
+                operatorButton.setFill(Color.rgb(224, 126, 15));
             }
         });
         operatorButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                operatorButton.setFill(Color.ORANGE);
+                operatorButton.setFill(Color.rgb(249, 138, 17));
                 setStrokes();
 
                 if (!value.equals("=")) {
@@ -216,13 +215,13 @@ public class Calculator extends Application {
         operatorText.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                operatorButton.setFill(Color.DARKORANGE);
+                operatorButton.setFill(Color.rgb(224, 126, 15));
             }
         });
         operatorText.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                operatorButton.setFill(Color.ORANGE);
+                operatorButton.setFill(Color.rgb(249, 138, 17));
                 setStrokes();
 
                 if (!value.equals("=")) {
@@ -319,13 +318,13 @@ public class Calculator extends Application {
         numberButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                numberButton.setFill(Color.gray(0.85));
+                numberButton.setFill(Color.rgb(191, 193, 195));
             }
         });
         numberButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                numberButton.setFill(Color.gray(0.9));
+                numberButton.setFill(Color.rgb(214, 215, 216));
                 setStrokes();
 
                 if (value.equals(".")) {
@@ -339,13 +338,13 @@ public class Calculator extends Application {
         numberText.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                numberButton.setFill(Color.gray(0.85));
+                numberButton.setFill(Color.rgb(191, 193, 195));
             }
         });
         numberText.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                numberButton.setFill(Color.gray(0.9));
+                numberButton.setFill(Color.rgb(214, 215, 216));
                 setStrokes();
 
                 if (value.equals(".")) {
@@ -361,6 +360,7 @@ public class Calculator extends Application {
     private void decimalPointMethod() {
         if (state == 0) {
             display.setText("0.");
+            fixDisplay(true);
             state = 1;
         } else if (state == 1) {
             if ((display.getText().length() < 10) && display.getText().indexOf(".") == -1) {
@@ -370,6 +370,7 @@ public class Calculator extends Application {
             }
         } else if (state == 2) {
             display.setText("0.");
+            fixDisplay(true);
             state = 3;
         } else if (state == 3) {
             if ((display.getText().length() < 10) && display.getText().indexOf(".") == -1) {
@@ -384,13 +385,13 @@ public class Calculator extends Application {
         greyButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                greyButton.setFill(Color.gray(0.75));
+                greyButton.setFill(Color.rgb(180, 181, 182));
             }
         });
         greyButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                greyButton.setFill(Color.gray(0.8));
+                greyButton.setFill(Color.rgb(201, 202, 203));
                 setStrokes();
 
                 switch (value) {
@@ -409,13 +410,13 @@ public class Calculator extends Application {
         greyText.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                greyButton.setFill(Color.gray(0.75));
+                greyButton.setFill(Color.rgb(180, 181, 182));
             }
         });
         greyText.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                greyButton.setFill(Color.gray(0.8));
+                greyButton.setFill(Color.rgb(201, 202, 203));
                 setStrokes();
 
                 switch (value) {
@@ -435,15 +436,14 @@ public class Calculator extends Application {
         fixDisplay(false);
         state = 0;
     }
-    
+
     private void negPosMethod() {
-        
+
     }
 
     private void percentMethod() {
-        
     }
-    
+
     /**
      *
      * - display text changes if there is a decimal point or a negative symbol
@@ -486,94 +486,114 @@ public class Calculator extends Application {
             case 1:
                 display.setFont(Font.font("HELVETICA", 50));
                 display.setX(160);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 13);
+                }
                 break;
             case 2:
                 display.setFont(Font.font("HELVETICA", 50));
                 display.setX(133);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 13);
+                }
                 break;
             case 3:
                 display.setFont(Font.font("HELVETICA", 50));
                 display.setX(106);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 13);
+                }
                 break;
             case 4:
                 display.setFont(Font.font("HELVETICA", 50));
                 display.setX(79);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 13);
+                }
                 break;
             case 5:
                 display.setFont(Font.font("HELVETICA", 50));
                 display.setX(52);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 13);
+                }
                 break;
             case 6:
                 display.setFont(Font.font("HELVETICA", 50));
                 display.setX(25);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 13);
+                }
                 break;
             case 7:
                 display.setFont(Font.font("HELVETICA", 42));
                 display.setX(25);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 9);
+                }
                 break;
             case 8:
                 display.setFont(Font.font("HELVETICA", 36));
                 display.setX(23);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 5);
+                }
                 break;
             case 9:
                 display.setFont(Font.font("HELVETICA", 32));
                 display.setX(20);
+                if (display.getText().indexOf(".") >= 0) // has decimal point
+                {
+                    display.setX(display.getX() - 2);
+                }
                 break;
-            case 10:
-                //scientific notation
-                display.setText(scientificNotation(display.getText()));
-                display.setFont(Font.font("HELVETICA", 32));
-                display.setX(20);
-                System.out.println("operand: " + operand);
-                break;
-
         }
-//
-//        switch (display.getText().length()) {
-//            case 1:
-//                display.setFont(Font.font("HELVETICA", 50));
-//                display.setX(170);
-//                break;
-//            case 2:
-//                display.setFont(Font.font("HELVETICA", 50));
-//                display.setX(143);
-//                break;
-//            case 3:
-//                display.setFont(Font.font("HELVETICA", 50));
-//                display.setX(122);
-//                break;
-//            case 4:
-//                display.setFont(Font.font("HELVETICA", 50));
-//                display.setX(95);
-//                break;
-//            case 5:
-//                display.setFont(Font.font("HELVETICA", 50));
-//                display.setX(68);
-//                break;
-//            case 6:
-//                display.setFont(Font.font("HELVETICA", 50));
-//                display.setX(41);
-//                break;
-//            case 7:
-//                display.setFont(Font.font("HELVETICA", 42));
-//                display.setX(41);
-//                break;
-//            case 8:
-//                display.setFont(Font.font("HELVETICA", 36));
-//                display.setX(39);
-//                break;
-//            case 9:
-//                display.setFont(Font.font("HELVETICA", 32));
-//                display.setX(36);
-//                break;
-//            case 10:
-//                display.setFont(Font.font("HELVETICA", 32));
-//                display.setX(36);
-//                break;
-//
-//        }
-        if (display.getText().length() > 9) {
-            //scientific notation.
+        if (digitCount > 9) {
+            //scientific notation
+            display.setText(scientificNotation(display.getText()));
+            switch (display.getText().length()) {
+                case 8:
+                    display.setFont(Font.font("HELVETICA", 42));
+                    display.setX(16);
+                    break;
+                case 9:
+                    display.setFont(Font.font("HELVETICA", 36));
+                    display.setX(18);
+                    break;
+                case 10:
+                    display.setFont(Font.font("HELVETICA", 32));
+                    display.setX(18);
+                    break;
+            }
+        
+        if (display.getText().startsWith("0.00000000")){
+                        //scientific notation
+            display.setText(scientificNotation(display.getText()));
+            switch (display.getText().length()) {
+                case 8:
+                    display.setFont(Font.font("HELVETICA", 42));
+                    display.setX(16);
+                    break;
+                case 9:
+                    display.setFont(Font.font("HELVETICA", 36));
+                    display.setX(18);
+                    break;
+                case 10:
+                    display.setFont(Font.font("HELVETICA", 32));
+                    display.setX(18);
+                    break;
+            }
+        }
+            
+            System.out.println("operand: " + operand);
         }
     }
 
@@ -585,7 +605,10 @@ public class Calculator extends Application {
         // ex number = 12,345,678,901
         // return 1.23x10^10
         int exp = (int) Math.floor(Math.log10(number));
+        System.out.println("exp:" + exp);
+        
         double beginning = number / (Math.pow(10, exp));
+        System.out.println("beginning: " + beginning);
 
         String beginningString = beginning + "";
 
@@ -633,17 +656,17 @@ public class Calculator extends Application {
         } else if (state == 1) {
             if ((display.getText().length() < 9 && display.getText().indexOf(".") == -1) || (display.getText().length() < 10 && display.getText().indexOf(".") > -1)) {
                 display.setText(display.getText() + number);
-                fixDisplay(false);
+                fixDisplay(true);
 
             }
         } else if (state == 2) {
             display.setText(number);
-            fixDisplay(false);
+            fixDisplay(true);
             state = 3;
         } else if (state == 3) {
             if ((display.getText().length() < 9 && display.getText().indexOf(".") == -1) || (display.getText().length() < 10 && display.getText().indexOf(".") > -1)) {
                 display.setText(display.getText() + number);
-                fixDisplay(false);
+                fixDisplay(true);
 
             }
         }

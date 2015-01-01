@@ -20,7 +20,7 @@ public class GreyButton extends Button {
 
     public GreyButton(double xCoord, double yCoord) {
         super(xCoord, yCoord);
-        this.setFill(Color.gray(0.8));
+        this.setFill(Color.rgb(201, 202, 203));
 
     }
 

@@ -18,6 +18,6 @@ public class WhiteButton extends Button {
 
     public WhiteButton(double xCoord, double yCoord) {
         super(xCoord, yCoord);
-        this.setFill(Color.gray(0.9));
+        this.setFill(Color.rgb(214, 215, 216));
     }
 }

@@ -19,7 +19,7 @@ public class OrangeButton extends Button {
 
     public OrangeButton(double xCoord, double yCoord) {
         super(xCoord, yCoord);
-        this.setFill(Color.ORANGE);
+        this.setFill(Color.rgb(249, 138, 17));
 
     }
 
