@@ -265,7 +265,11 @@ public class Calculator extends Application {
         }
         if (state == 2) {
             operator = '/';
-            operand = new BigDecimal(display.getText());
+            if (display.getText().indexOf("x") >= 0) {
+                operand = answer;
+            } else {
+                operand = new BigDecimal(display.getText());
+            }
         }
         if (state == 3) {
             operand2 = new BigDecimal(display.getText());
@@ -290,7 +294,11 @@ public class Calculator extends Application {
         }
         if (state == 2) {
             operator = '*';
-            operand = new BigDecimal(display.getText());
+            if (display.getText().indexOf("x") >= 0) {
+                operand = answer;
+            } else {
+                operand = new BigDecimal(display.getText());
+            }
         }
         if (state == 3) {
             operand2 = new BigDecimal(display.getText());
@@ -315,7 +323,11 @@ public class Calculator extends Application {
         }
         if (state == 2) {
             operator = '-';
-            operand = new BigDecimal(display.getText());
+            if (display.getText().indexOf("x") >= 0) {
+                operand = answer;
+            } else {
+                operand = new BigDecimal(display.getText());
+            }
         }
         if (state == 3) {
             operand2 = new BigDecimal(display.getText());
@@ -340,7 +352,11 @@ public class Calculator extends Application {
         }
         if (state == 2) {
             operator = '+';
-            operand = new BigDecimal(display.getText());
+            if (display.getText().indexOf("x") >= 0) {
+                operand = answer;
+            } else {
+                operand = new BigDecimal(display.getText());
+            }
         }
         if (state == 3) {
             operand2 = new BigDecimal(display.getText());
@@ -705,15 +721,13 @@ public class Calculator extends Application {
                         break;
                 }
             }
-
-            System.out.println("operand: " + operand);
         }
 
     }
 
     public String scientificNotation(String display) {
 
-        double number = Double.parseDouble(display);
+        double number = answer.doubleValue();
         // ex number = 1,234,567,890
         // return 1.234x10^9
         // ex number = 12,345,678,901
@@ -724,18 +738,15 @@ public class Calculator extends Application {
         double beginning = number / (Math.pow(10, exp));
         System.out.println("beginning: " + beginning);
 
-        String beginningString = beginning + "";
+        String beginningString;
 
         if (exp >= 10) {//2 digits in exponent means 3 digits in beginning
-            if (beginningString.length() > 3) {
-                beginningString = beginningString.substring(0, 4);
-            }
+            beginning = Math.round(beginning * 100) / 100.0;
         } else {
-            if (beginningString.length() > 4) {
-                beginningString = beginningString.substring(0, 5);
-            }
+            beginning = Math.round(beginning * 1000) / 1000.0;
         }
-
+        beginningString = beginning + "";
+        System.out.println("sigfig: " + beginningString + "x10^" + exp);
         return beginningString + "x10^" + exp;
 
     }
