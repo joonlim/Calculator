@@ -5,6 +5,7 @@
  */
 package calculator;
 
+import java.math.BigDecimal;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -28,9 +29,10 @@ public class Calculator extends Application {
 
     int state = 0;
 
-    double operand;
+    BigDecimal operand;
+    BigDecimal operand2;
     char operator;
-    double answer;
+    BigDecimal answer;
 
     private Rectangle result;
     private Text display;
@@ -251,56 +253,100 @@ public class Calculator extends Application {
 
     private void divideMethod() throws NumberFormatException {
         //divide method.
-        if (state == 1) {
+        if (state == 0 && display.getText().equals("0")) {
             operator = '/';
-            operand = Double.parseDouble(display.getText());
+            operand = new BigDecimal(display.getText());
             state = 2;
         }
+        if (state == 1) {
+            operator = '/';
+            operand = new BigDecimal(display.getText());
+            state = 2;
+        }
+        if (state == 2) {
+            operator = '/';
+            operand = new BigDecimal(display.getText());
+        }
         if (state == 3) {
+            operand2 = new BigDecimal(display.getText());
             deriveAnswer();
             operator = '/';
+            operand = answer;
             state = 2;
         }
     }
 
     private void multiplyMethod() throws NumberFormatException {
         //multiply method.
-        if (state == 1) {
+        if (state == 0 && display.getText().equals("0")) {
             operator = '*';
-            operand = Double.parseDouble(display.getText());
+            operand = new BigDecimal(display.getText());
             state = 2;
         }
+        if (state == 1) {
+            operator = '*';
+            operand = new BigDecimal(display.getText());
+            state = 2;
+        }
+        if (state == 2) {
+            operator = '*';
+            operand = new BigDecimal(display.getText());
+        }
         if (state == 3) {
+            operand2 = new BigDecimal(display.getText());
             deriveAnswer();
             operator = '*';
+            operand = answer;
             state = 2;
         }
     }
 
     private void subtractMethod() throws NumberFormatException {
         //subtract method.
-        if (state == 1) {
+        if (state == 0 && display.getText().equals("0")) {
             operator = '-';
-            operand = Double.parseDouble(display.getText());
+            operand = new BigDecimal(display.getText());
             state = 2;
         }
+        if (state == 1) {
+            operator = '-';
+            operand = new BigDecimal(display.getText());
+            state = 2;
+        }
+        if (state == 2) {
+            operator = '-';
+            operand = new BigDecimal(display.getText());
+        }
         if (state == 3) {
+            operand2 = new BigDecimal(display.getText());
             deriveAnswer();
             operator = '-';
+            operand = answer;
             state = 2;
         }
     }
 
     private void addMethod() throws NumberFormatException {
         //add method.
-        if (state == 1) {
+        if (state == 0 && display.getText().equals("0")) {
             operator = '+';
-            operand = Double.parseDouble(display.getText());
+            operand = new BigDecimal(display.getText());
             state = 2;
         }
+        if (state == 1) {
+            operator = '+';
+            operand = new BigDecimal(display.getText());
+            state = 2;
+        }
+        if (state == 2) {
+            operator = '+';
+            operand = new BigDecimal(display.getText());
+        }
         if (state == 3) {
+            operand2 = new BigDecimal(display.getText());
             deriveAnswer();
             operator = '+';
+            operand = answer;
             state = 2;
         }
     }
@@ -309,7 +355,9 @@ public class Calculator extends Application {
         //equals method.
         //displays answer
         if (state == 3) {
+            operand2 = new BigDecimal(display.getText());
             deriveAnswer();
+            operand = answer;
             state = 2;
         }
     }
@@ -422,6 +470,13 @@ public class Calculator extends Application {
                 switch (value) {
                     case "AC":
                         acMethod();
+                        break;
+                    case "+/-":
+                        negPosMethod();
+                        break;
+                    case "%":
+                        percentMethod();
+                        break;
                 }
             }
         });
@@ -429,7 +484,7 @@ public class Calculator extends Application {
 
     private void acMethod() {
         if (acText.getText().equals("C")) {
-            setACtoC();
+            setCToAC();
         }
 
         display.setText("0");
@@ -438,10 +493,28 @@ public class Calculator extends Application {
     }
 
     private void negPosMethod() {
-
+        if (display.getText().indexOf("-") == 0) {
+            display.setText(display.getText().substring(1));
+        } else {
+            display.setText("-" + display.getText());
+        }
+        if (state == 2) {
+            display.setText("-0");
+            state = 3;
+        }
+        fixDisplay(true);
     }
 
     private void percentMethod() {
+        if (state > 0) {
+            operand = new BigDecimal(display.getText());
+            operand2 = new BigDecimal("0.01");
+            operator = '*';
+            deriveAnswer();
+            operand = answer;
+            state = 2;
+        }
+
     }
 
     /**
@@ -458,8 +531,12 @@ public class Calculator extends Application {
      */
     public void fixDisplay(boolean decButtonPressed) {
 
-        double numberDisplayed = Double.parseDouble(display.getText());
+        if (display.getText().equals("Error")) {
+            display.setFont(Font.font("HELVETICA", 50));
+            display.setX(79);
+        }
 
+        double numberDisplayed = Double.parseDouble(display.getText());
         if (!decButtonPressed && numberDisplayed % 1 == 0) {
             display.setText((int) numberDisplayed + "");
         }
@@ -490,6 +567,10 @@ public class Calculator extends Application {
                 {
                     display.setX(display.getX() - 13);
                 }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 19);
+                }
                 break;
             case 2:
                 display.setFont(Font.font("HELVETICA", 50));
@@ -497,6 +578,10 @@ public class Calculator extends Application {
                 if (display.getText().indexOf(".") >= 0) // has decimal point
                 {
                     display.setX(display.getX() - 13);
+                }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 19);
                 }
                 break;
             case 3:
@@ -506,6 +591,10 @@ public class Calculator extends Application {
                 {
                     display.setX(display.getX() - 13);
                 }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 19);
+                }
                 break;
             case 4:
                 display.setFont(Font.font("HELVETICA", 50));
@@ -513,6 +602,10 @@ public class Calculator extends Application {
                 if (display.getText().indexOf(".") >= 0) // has decimal point
                 {
                     display.setX(display.getX() - 13);
+                }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 19);
                 }
                 break;
             case 5:
@@ -522,6 +615,10 @@ public class Calculator extends Application {
                 {
                     display.setX(display.getX() - 13);
                 }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 19);
+                }
                 break;
             case 6:
                 display.setFont(Font.font("HELVETICA", 50));
@@ -529,6 +626,10 @@ public class Calculator extends Application {
                 if (display.getText().indexOf(".") >= 0) // has decimal point
                 {
                     display.setX(display.getX() - 13);
+                }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 19);
                 }
                 break;
             case 7:
@@ -538,6 +639,10 @@ public class Calculator extends Application {
                 {
                     display.setX(display.getX() - 9);
                 }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 16);
+                }
                 break;
             case 8:
                 display.setFont(Font.font("HELVETICA", 36));
@@ -546,6 +651,10 @@ public class Calculator extends Application {
                 {
                     display.setX(display.getX() - 5);
                 }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 14);
+                }
                 break;
             case 9:
                 display.setFont(Font.font("HELVETICA", 32));
@@ -553,6 +662,10 @@ public class Calculator extends Application {
                 if (display.getText().indexOf(".") >= 0) // has decimal point
                 {
                     display.setX(display.getX() - 2);
+                }
+                if (display.getText().indexOf("-") == 0) // is negaive
+                {
+                    display.setX(display.getX() - 12);
                 }
                 break;
         }
@@ -573,28 +686,29 @@ public class Calculator extends Application {
                     display.setX(18);
                     break;
             }
-        
-        if (display.getText().startsWith("0.00000000")){
-                        //scientific notation
-            display.setText(scientificNotation(display.getText()));
-            switch (display.getText().length()) {
-                case 8:
-                    display.setFont(Font.font("HELVETICA", 42));
-                    display.setX(16);
-                    break;
-                case 9:
-                    display.setFont(Font.font("HELVETICA", 36));
-                    display.setX(18);
-                    break;
-                case 10:
-                    display.setFont(Font.font("HELVETICA", 32));
-                    display.setX(18);
-                    break;
+
+            if (display.getText().startsWith("0.00000000")) {
+                //scientific notation
+                display.setText(scientificNotation(display.getText()));
+                switch (display.getText().length()) {
+                    case 8:
+                        display.setFont(Font.font("HELVETICA", 42));
+                        display.setX(16);
+                        break;
+                    case 9:
+                        display.setFont(Font.font("HELVETICA", 36));
+                        display.setX(18);
+                        break;
+                    case 10:
+                        display.setFont(Font.font("HELVETICA", 32));
+                        display.setX(18);
+                        break;
+                }
             }
-        }
-            
+
             System.out.println("operand: " + operand);
         }
+
     }
 
     public String scientificNotation(String display) {
@@ -606,7 +720,7 @@ public class Calculator extends Application {
         // return 1.23x10^10
         int exp = (int) Math.floor(Math.log10(number));
         System.out.println("exp:" + exp);
-        
+
         double beginning = number / (Math.pow(10, exp));
         System.out.println("beginning: " + beginning);
 
@@ -640,7 +754,7 @@ public class Calculator extends Application {
         acText.setY(SIDE * 2 + 31);
     }
 
-    private void setACtoC() {
+    private void setCToAC() {
         // set C to AC
         acText.setText("AC");
         acText.setX(12);
@@ -649,45 +763,74 @@ public class Calculator extends Application {
     }
 
     private void numberFunction(String number) {
+        if (state == 0 && number == "0") {
+            setACToC();
+            if (display.getText().indexOf("-") == 0) {
+                display.setText("-0");
+            } else {
+                display.setText(number);
+            }
+            fixDisplay(true);
+        }
         if (state == 0 && number != "0") {
             setACToC();
             display.setText(number);
+            fixDisplay(true);
             state = 1;
         } else if (state == 1) {
+            //only add number if less than 9 digits
             if ((display.getText().length() < 9 && display.getText().indexOf(".") == -1) || (display.getText().length() < 10 && display.getText().indexOf(".") > -1)) {
                 display.setText(display.getText() + number);
                 fixDisplay(true);
 
             }
         } else if (state == 2) {
+            if (acText.getText().equals("AC")) {
+                setACToC();
+            }
             display.setText(number);
             fixDisplay(true);
             state = 3;
         } else if (state == 3) {
-            if ((display.getText().length() < 9 && display.getText().indexOf(".") == -1) || (display.getText().length() < 10 && display.getText().indexOf(".") > -1)) {
+            if (display.getText().equals("0")) {
+                display.setText(number);
+            } else if (display.getText().equals("-0")) {
+                display.setText("-" + number);
+            } else if ((display.getText().length() < 9 && display.getText().indexOf(".") == -1) || (display.getText().length() < 10 && display.getText().indexOf(".") > -1)) {
                 display.setText(display.getText() + number);
-                fixDisplay(true);
-
             }
+            fixDisplay(true);
+
         }
     }
 
     private void deriveAnswer() throws NumberFormatException {
         switch (operator) {
             case '+':
-                operand += Double.parseDouble(display.getText());
+                answer = operand.add(operand2);
+                System.out.println(operand + "+" + operand2 + "=" + answer);
                 break;
             case '-':
-                operand -= Double.parseDouble(display.getText());
+                answer = operand.subtract(operand2);
+                System.out.println(operand + "-" + operand2 + "=" + answer);
                 break;
             case '*':
-                operand *= Double.parseDouble(display.getText());
+                answer = operand.multiply(operand2);
+                System.out.println(operand + "*" + operand2 + "=" + answer);
                 break;
             case '/':
-                operand /= Double.parseDouble(display.getText());
+                if (operand2.doubleValue() == 0) {
+                    System.out.println("divide by 0.");
+                    display.setText("Error");
+                    fixDisplay(false);
+                    state = 0;
+                } else {
+                    answer = new BigDecimal(operand.doubleValue() / (operand2.doubleValue()));
+                    System.out.println(operand + "/" + operand2 + "=" + answer);
+                }
                 break;
         }
-        display.setText(operand + "");
+        display.setText(answer + "");
         fixDisplay(false);
     }
 
