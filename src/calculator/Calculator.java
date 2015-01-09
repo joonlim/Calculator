@@ -6,6 +6,8 @@
 package calculator;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -16,18 +18,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import static tools.ArithmeticTools.log10;
 
 /**
  * Calculator GUI
  *
  * @author Joon
- * @version 0.8 Dec 31, 2014
+ * @version 0.9.2 Dec 31, 2014
  */
 public class Calculator extends Application {
 
     final int SIDE = 50;
 
-    int state = 0;
+    byte state = 0;
 
     BigDecimal operand;
     BigDecimal operand2;
@@ -178,7 +181,7 @@ public class Calculator extends Application {
         primaryStage.show();
     }
 
-    private void setOrangeButton(OrangeButton operatorButton, Text operatorText, String value) {
+    private void setOrangeButton(OrangeButton operatorButton, Text operatorText, final String value) {
         operatorButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -378,7 +381,7 @@ public class Calculator extends Application {
         }
     }
 
-    private void setWhiteButton(WhiteButton numberButton, Text numberText, String value) {
+    private void setWhiteButton(WhiteButton numberButton, Text numberText, final String value) {
         numberButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -445,7 +448,7 @@ public class Calculator extends Application {
         }
     }
 
-    private void setGreyButton(GreyButton greyButton, Text greyText, String value) {
+    private void setGreyButton(GreyButton greyButton, Text greyText, final String value) {
         greyButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -547,7 +550,7 @@ public class Calculator extends Application {
      */
     public void fixDisplay(boolean decButtonPressed) {
 
-        if (display.getText().equals("Error")) {
+        if (display.getText().equals("error")) {
             display.setFont(Font.font("HELVETICA", 50));
             display.setX(79);
         }
@@ -557,13 +560,11 @@ public class Calculator extends Application {
             display.setText((int) numberDisplayed + "");
         }
 
-//        if((display.getText().length() > 10 && display.getText().indexOf("-") == -1)
-//            || (display.getText().length() > 9 && display.getText().indexOf("-") == 0)){
-//            numberDisplayed = (double)Math.round(numberDisplayed * 100000000) / 100000000;
-//            display.setText(numberDisplayed + "");
-//            System.out.println(display.getText());
-//        }
-        if (display.getText().length() > 10 && display.getText().indexOf("-") == -1 && display.getText().indexOf(".") >= 0) {
+
+        
+        if ((display.getText().length() > 10 && display.getText().indexOf("-") == -1 && display.getText().indexOf(".") >= 0 && display.getText().indexOf("E") == -1)
+                ||
+                (display.getText().length() > 9 && display.getText().indexOf("-") > 1 && display.getText().indexOf(".") >= 0 && display.getText().indexOf("E") == -1)) {
             display.setText(display.getText().substring(0, 10));
         }
 
@@ -703,21 +704,21 @@ public class Calculator extends Application {
                     break;
             }
 
-            if (display.getText().startsWith("0.00000000")) {
+            if (display.getText().startsWith("0.00000000") || display.getText().contains("^-") || display.getText().contains("E")) {
                 //scientific notation
                 display.setText(scientificNotation(display.getText()));
                 switch (display.getText().length()) {
-                    case 8:
-                        display.setFont(Font.font("HELVETICA", 42));
+                    case 10:
+                        display.setFont(Font.font("HELVETICA", 40));
+                        display.setX(14);
+                        break;
+                    case 11:
+                        display.setFont(Font.font("HELVETICA", 34));
                         display.setX(16);
                         break;
-                    case 9:
-                        display.setFont(Font.font("HELVETICA", 36));
-                        display.setX(18);
-                        break;
-                    case 10:
-                        display.setFont(Font.font("HELVETICA", 32));
-                        display.setX(18);
+                    case 12: 
+                        display.setFont(Font.font("HELVETICA", 30));
+                        display.setX(16);
                         break;
                 }
             }
@@ -727,15 +728,46 @@ public class Calculator extends Application {
 
     public String scientificNotation(String display) {
 
-        double number = answer.doubleValue();
+        BigDecimal number = answer;
+        boolean negative = false;
         // ex number = 1,234,567,890
         // return 1.234x10^9
         // ex number = 12,345,678,901
         // return 1.23x10^10
-        int exp = (int) Math.floor(Math.log10(number));
+        if(!number.abs().equals(number)) { //number is negative
+            negative = true;
+            number = number.abs();
+        }
+        
+        int exp = (int) Math.floor(log10(number).doubleValue());
         System.out.println("exp:" + exp);
 
-        double beginning = number / (Math.pow(10, exp));
+        if (exp >= 100) {
+            System.out.println("number too big. more than 10^100");
+            fixDisplay(false);
+            state = 0;
+            answer = new BigDecimal(0);
+            operand = new BigDecimal(0);
+            operand2 = new BigDecimal(0);
+            return "error";
+
+        }
+
+        if (exp <= -100) {
+            System.out.println("number too small. smaller than 10^-100");
+            fixDisplay(false);
+            state = 0;
+            answer = new BigDecimal(0);
+            operand = new BigDecimal(0);
+            operand2 = new BigDecimal(0);
+            return "error";
+
+        }
+        if(negative) {
+            number = number.multiply(new BigDecimal(-1));
+        }
+        BigDecimal bigBeginning = number.divide(new BigDecimal(Math.pow(10, exp)), MathContext.DECIMAL128);
+        double beginning = bigBeginning.doubleValue();
         System.out.println("beginning: " + beginning);
 
         String beginningString;
@@ -790,6 +822,9 @@ public class Calculator extends Application {
             state = 1;
         } else if (state == 1) {
             //only add number if less than 9 digits
+            if (display.getText().equals("-0")) {
+                display.setText("-" + number);
+            }
             if ((display.getText().length() < 9 && display.getText().indexOf(".") == -1) || (display.getText().length() < 10 && display.getText().indexOf(".") > -1)) {
                 display.setText(display.getText() + number);
                 fixDisplay(true);
@@ -832,17 +867,20 @@ public class Calculator extends Application {
             case '/':
                 if (operand2.doubleValue() == 0) {
                     System.out.println("divide by 0.");
-                    display.setText("Error");
+                    display.setText("error");
                     fixDisplay(false);
                     state = 0;
                 } else {
-                    answer = new BigDecimal(operand.doubleValue() / (operand2.doubleValue()));
+                    answer = operand.divide(operand2, MathContext.DECIMAL128);
                     System.out.println(operand + "/" + operand2 + "=" + answer);
                 }
                 break;
         }
         display.setText(answer + "");
+        System.out.println("Display: " + display.getText());
         fixDisplay(false);
+        System.out.println("display after fixDisplay: " + display.getText());
+        System.out.println("length: " + display.getText().length());
     }
 
     /**
