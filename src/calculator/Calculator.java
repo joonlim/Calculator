@@ -517,10 +517,6 @@ public class Calculator extends Application {
         } else {
             display.setText("-" + display.getText());
         }
-        if (state == 2) {
-            display.setText("-0");
-            state = 3;
-        }
         fixDisplay(true);
     }
 
@@ -530,7 +526,9 @@ public class Calculator extends Application {
             operand2 = new BigDecimal("0.01");
             operator = '*';
             deriveAnswer();
+
             operand = answer;
+            fixDisplay(false);
             state = 2;
         }
 
@@ -560,11 +558,8 @@ public class Calculator extends Application {
             display.setText((int) numberDisplayed + "");
         }
 
-
-        
         if ((display.getText().length() > 10 && display.getText().indexOf("-") == -1 && display.getText().indexOf(".") >= 0 && display.getText().indexOf("E") == -1)
-                ||
-                (display.getText().length() > 9 && display.getText().indexOf("-") > 1 && display.getText().indexOf(".") >= 0 && display.getText().indexOf("E") == -1)) {
+                || (display.getText().length() > 9 && display.getText().indexOf("-") > 1 && display.getText().indexOf(".") >= 0 && display.getText().indexOf("E") == -1)) {
             display.setText(display.getText().substring(0, 10));
         }
 
@@ -710,15 +705,15 @@ public class Calculator extends Application {
                 switch (display.getText().length()) {
                     case 10:
                         display.setFont(Font.font("HELVETICA", 40));
-                        display.setX(14);
+                        display.setX(10);
                         break;
                     case 11:
                         display.setFont(Font.font("HELVETICA", 34));
-                        display.setX(16);
+                        display.setX(12);
                         break;
-                    case 12: 
+                    case 12:
                         display.setFont(Font.font("HELVETICA", 30));
-                        display.setX(16);
+                        display.setX(14);
                         break;
                 }
             }
@@ -734,11 +729,11 @@ public class Calculator extends Application {
         // return 1.234x10^9
         // ex number = 12,345,678,901
         // return 1.23x10^10
-        if(!number.abs().equals(number)) { //number is negative
+        if (!number.abs().equals(number)) { //number is negative
             negative = true;
             number = number.abs();
         }
-        
+
         int exp = (int) Math.floor(log10(number).doubleValue());
         System.out.println("exp:" + exp);
 
@@ -763,7 +758,7 @@ public class Calculator extends Application {
             return "error";
 
         }
-        if(negative) {
+        if (negative) {
             number = number.multiply(new BigDecimal(-1));
         }
         BigDecimal bigBeginning = number.divide(new BigDecimal(Math.pow(10, exp)), MathContext.DECIMAL128);
